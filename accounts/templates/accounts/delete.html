@@ -1,0 +1,13 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content%}
+
+<p> Вы уверены что хотите удалить этот заказ "{{order}}"?</p>
+<form action="{% url 'delete_order' order.id %}"  method="post">
+    {% csrf_token %}
+    {{form}}
+    <a class="btn btn-dark"href="{% url 'home' %}">Отмена</a>
+    <input class="btn btn-danger" type="submit" name="Confirm">
+</form>
+
+{% endblock %}

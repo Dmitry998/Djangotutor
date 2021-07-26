@@ -14,12 +14,14 @@
 			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
 			<table class="table table-sm">
 				<tr>
-					<th>Customer</th>
-					<th>Phone</th>
+					<th></th>
+					<th>Покупатель</th>
+					<th>Телефон</th>
 				</tr>
 
 				{% for customer in customers %}
 					<tr>
+						<td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id%}">Просмотр</a></td>
 						<td>{{customer.name}}</td>
 						<td>{{customer.phone}}</td>
 					</tr>
@@ -33,11 +35,11 @@
 		<h5>LAST 5 ORDERS</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="">Create Order</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_order'%}">Create Order</a>
 			<table class="table table-sm">
 				<tr>
 					<th>Product</th>
-					<th>Date Orderd</th>
+					<th>Date Ordered</th>
 					<th>Status</th>
 					<th>Update</th>
 					<th>Remove</th>
@@ -46,10 +48,10 @@
 				{% for order in orders %}
 					<tr>
 						<td>{{order.product}}</td>
-						<td>{{order.date_created}}</td>
-						<td>{{order.status}}</td>
-						<td><a href="">Обновить</a></td>
-						<td><a href="">Удалить</a></td>
+						<td>{{order.date_created|date:"Дата: d.m.Y  Время: H:i"}}</td>
+						<td>{{order.get_status_display}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Обновить</a></td>
+						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Удалить</a></td>
 					</tr>
 				{% endfor %}
 
